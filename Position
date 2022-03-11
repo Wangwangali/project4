@@ -1,0 +1,97 @@
+#include "Position.h"
+#include "utility.h"
+
+
+Position::Position() {
+    row = 0;
+    col = 0;
+}
+
+Position::Position(int row_in, int col_in) {
+    row = check_range(row_in);
+    col = check_range(col_in);
+}
+
+Position::Position(char row_in, char col_in) {
+    row = 0;
+    for (int i = '0'; i <= '9'; i++) {
+        if (row_in == i) {
+            row = i - '1';
+        }
+    }
+    row = check_range(row);
+    col_in = toupper(col_in);
+    col = 0;
+    for (int i = 'A'; i <= 'Z'; i++) {
+        if (col_in == i) {
+            col = i - 'A' - 1;
+        }
+    }
+    col = check_range(col);
+}
+
+int Position::get_row() {
+    return row;
+}
+
+void Position::set_row(int row_in) {
+    row = row_in;
+    return;
+}
+
+int Position::get_col() {
+    return col;
+}
+
+void Position::set_col(int col_in) {
+    col = col_in;
+    return;
+}
+
+void Position::read(istream &is) {
+    is >> row >> col;
+    row = check_range(row);
+    col = toupper(col);
+    col = check_range(col);
+    if (is.fail()) {
+        is >> '(' >> row >> ',' >> col >> ')';
+        row = check_range(row);
+        col = toupper(col);
+        col = check_range(col);
+    }
+    return;
+}
+
+void Position::write(ostream &os) {
+    
+    return;
+}
+
+int Position::check_range(int val) {
+    if (val >= 0 && val < MAX_GRID_SIZE) {
+        return val;
+    }
+    else {
+        if (abs(val - 0) > abs(val - MAX_GRID_SIZE - 1)) {
+            return MAX_GRID_SIZE - 1;
+        }
+        else {
+            return 0;
+        }
+    }
+}
+
+
+// Your code goes above this line.
+// Don't change the implementations below!
+
+istream &operator>>(istream &is,  Position &pos) {
+    pos.read(is);
+    return is;
+}
+
+ostream &operator<<(ostream &os, Position pos) {
+    pos.write(os);
+    return os;
+}
+
