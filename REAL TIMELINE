@@ -1,0 +1,6 @@
+DONEMarch 8: You’ve familiarized yourself with the game of battleship and looked over this spec a couple times.
+DONEMarch 10: Starter code downloaded and new project set up in IDE. Code compiles on your IDE. Code compiles on the autograder (submit to verify). You’ve read through the spec.
+DONEMarch 11: Tests for the Position class added to test.cpp and functions in Position.cpp fully implemented and tested. Submitted to the autograder to verify it’s passing all Position tests and catching the associated bug. A lot of this class is done in Lab 8 and Lab 9!
+March 14: Tests for the Ship class added to test.cpp and functions in Ship.cpp fully implemented and tested. Submitted to the autograder to make sure it’s working.
+March 17: Tests for the Player class added to test.cpp and functions in Player.cpp fully implemented and tested. Submitted to the autograder to make sure it’s working. This is often the most difficult part of the project for students.
+March 18: Tests for the Game class added to test.cpp and function in Game.cpp fully implemented and tested. Played through the game a few times and checked to see that it looks similar to the sample runs (it won’t look exactly the same since the CPU’s moves are random). Submitted to the autograder for the 5% deadline!
