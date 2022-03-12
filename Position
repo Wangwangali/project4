@@ -14,7 +14,7 @@ Position::Position(int row_in, int col_in) {
 
 Position::Position(char row_in, char col_in) {
     row = 0;
-    for (int i = '0'; i <= '9'; i++) {
+    for (int i = '0'; i <= '8'; i++) {
         if (row_in == i) {
             row = i - '1';
         }
@@ -22,9 +22,9 @@ Position::Position(char row_in, char col_in) {
     row = check_range(row);
     col_in = toupper(col_in);
     col = 0;
-    for (int i = 'A'; i <= 'Z'; i++) {
+    for (int i = 'A'; i <= 'H'; i++) {
         if (col_in == i) {
-            col = i - 'A' - 1;
+            col = i - 'A';
         }
     }
     col = check_range(col);
@@ -35,7 +35,7 @@ int Position::get_row() {
 }
 
 void Position::set_row(int row_in) {
-    row = row_in;
+    row = check_range(row_in);
     return;
 }
 
@@ -44,43 +44,46 @@ int Position::get_col() {
 }
 
 void Position::set_col(int col_in) {
-    col = col_in;
+    col = check_range(col_in);
     return;
 }
 
 void Position::read(istream &is) {
-    is >> row >> col;
-    row = check_range(row);
-    col = toupper(col);
-    col = check_range(col);
+    char left_p = '(';
+    char comma = ',';
+    char right_p = ')';
+    char col_char;
+    
+    is >> row >> col_char;
     if (is.fail()) {
-        is >> '(' >> row >> ',' >> col >> ')';
-        row = check_range(row);
-        col = toupper(col);
-        col = check_range(col);
+        is.clear();
+        is >> left_p >> row >> comma >> col_char >> right_p;
     }
-    return;
-}
-
-void Position::write(ostream &os) {
+    row = check_range(row - 1);
+    col = check_range(toupper(col_char) - 'A');
     
     return;
 }
 
+void Position::write(ostream &os) {
+    os << "(" << row + 1 << "," << char(col + 'A') << ")" << endl;
+    return;
+}
+
 int Position::check_range(int val) {
+    int highest_col = MAX_GRID_SIZE - 1;
     if (val >= 0 && val < MAX_GRID_SIZE) {
         return val;
     }
     else {
         if (abs(val - 0) > abs(val - MAX_GRID_SIZE - 1)) {
-            return MAX_GRID_SIZE - 1;
+            return highest_col;
         }
         else {
             return 0;
         }
     }
 }
-
 
 // Your code goes above this line.
 // Don't change the implementations below!
