@@ -1,0 +1,120 @@
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <cstdlib>
+
+#include "Position.h"
+#include "Ship.h"
+#include "Player.h"
+#include "Game.h"
+#include "utility.h"
+
+using namespace std;
+
+
+void test_position();
+void test_ship();
+void test_player();
+void test_game();
+
+void startTests() {
+    test_position();
+    test_ship();
+    test_player();
+    
+    return;
+}
+
+void test_position() {
+    // testing Position default constructor here
+    Position start_pos1;
+    Position end_pos;
+    cout << "Testing Position::Position() - default constructor\n";
+    cout << "start_pos, expected output: (1,A) actual output: " << start_pos1 << endl;
+    cout << "end_pos, expected output: (1,A) actual output: " << end_pos << endl;
+    
+    // testing Position non-default constructor (ints)
+    Position start_pos2(3, 4);
+    Position start_pos3(10, 10);
+    Position start_pos4(-1, -1);
+    cout << "Testing Position::Position() - int non-default constructor\n";
+    cout << "start_pos2, expected output: (4,E) actual output: " << start_pos2 << endl;
+    cout << "start_pos3, expected output: (8,H) actual output: " << start_pos3 << endl;
+    cout << "start_pos4, expected output: (1,A) actual output: " << start_pos4 << endl;
+    
+    // testing Position non-default constructor (chars)
+    Position start_pos5('3', 'C');
+    Position start_pos6('8', 'g');
+    Position start_pos7('1', 'h');
+    cout << "Testing Position::Position() - char non-default constructor\n";
+    cout << "start_pos5, expected output: (3,C) actual output: " << start_pos5 << endl;
+    cout << "start_pos6, expected output: (8,G) actual output: " << start_pos6 << endl;
+    cout << "start_pos7, expected output: (1,H) actual output: " << start_pos7 << endl;
+    
+    // testing Position setters here
+    start_pos1.set_row(4);
+    start_pos1.set_col(5);
+    start_pos2.set_row(9);
+    start_pos2.set_col(9);
+    start_pos3.set_row(-1);
+    start_pos3.set_col(-1);
+    cout << "\nTesting Position::set_row() and Position::set_col()\n";
+    cout << "start_pos1, expected output: (5,F) actual output: " << start_pos1 << endl;
+    cout << "start_pos2, expected output: (8,H) actual output: " << start_pos2 << endl;
+    cout << "start_pos3, expected output: (1,A) actual output: " << start_pos3 << endl;
+    
+    // testing Position::get_row()
+    cout << "\nTesting Position::get_row()\n";
+    cout << "start_pos1, expected output: 4, actual output: " << start_pos1.get_row()
+         << endl;
+    cout << "start_pos2, expected output: 7, actual output: " << start_pos2.get_row()
+         << endl;
+    cout << "start_pos3, expected output: 0, actual output: " << start_pos3.get_row()
+         << endl;
+    
+    // testing Position::get_col()
+    cout << "\nTesting Position::get_col()\n";
+    cout << "start_pos1, expected output: 5, actual output: " << start_pos1.get_col()
+         << endl;
+    cout << "start_pos2, expected output: 7, actual output: " << start_pos2.get_col()
+         << endl;
+    cout << "start_pos3, expected output: 0, actual output: " << start_pos3.get_col()
+         << endl;
+    
+    // testing Position read
+    ifstream input_file;
+    input_file.open("grid1.txt");
+    if (input_file.good()) {
+
+        // can use the Position::read() function directly
+        start_pos1.read(input_file);
+
+        // or use the extraction operator
+        input_file >> end_pos;
+
+        cout << "\nTesting Position::read()\n";
+        cout << "start_pos1, expected output: (1,A) actual output: " << start_pos1 << endl;
+        cout << "end_pos, expected output: (4,A) actual output: " << end_pos << endl;
+    }
+    else {
+        cout << "\nError opening grid1.txt\n";
+    }
+    
+    //testing write
+    ofstream output_file;
+    output_file.open("grid2.txt");
+    start_pos1.write(output_file);
+    end_pos.write(output_file);
+    return;
+}
+
+void test_ship() {
+    // Write your tests here
+    return;
+}
+
+void test_player() {
+    // Write your tests here
+    return;
+}
+
